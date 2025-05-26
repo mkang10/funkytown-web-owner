@@ -6,6 +6,7 @@ import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import { loginUser } from "@/ultis/AuthAPI";
 import { LoginResponse } from "@/type/auth";
+import { motion } from "framer-motion";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -27,7 +28,7 @@ export default function LoginPage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Xử lý đăng nhập: gọi API qua loginUser và hiển thị toast
+  // Xử lý đăng nhập
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -42,7 +43,7 @@ export default function LoginPage() {
             background: "linear-gradient(90deg, #2152ff, #21d4fd)",
             color: "#fff",
             fontWeight: 500,
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.15)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           },
           iconTheme: {
             primary: "#4ade80",
@@ -62,7 +63,7 @@ export default function LoginPage() {
             background: "#ff4d4d",
             color: "#fff",
             fontWeight: 500,
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.15)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           },
           iconTheme: {
             primary: "#ff0000",
@@ -82,7 +83,7 @@ export default function LoginPage() {
             background: "#ff4d4d",
             color: "#fff",
             fontWeight: 500,
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.15)",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
           },
           iconTheme: {
             primary: "#ff0000",
@@ -96,88 +97,134 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-full bg-white">
+    <div className="flex flex-col min-h-screen w-full bg-gradient-to-b from-white via-blue-50 to-white">
       {/* NAVBAR */}
-      <nav className="w-full bg-white shadow">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="text-lg font-bold text-gray-700">Ftown Admin</div>
+      <nav className="w-full bg-white/70 shadow-sm backdrop-blur">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500"
+          >
+            Ftown Admin
+          </motion.div>
         </div>
       </nav>
 
-      {/* BANNER (50vh, margin, bo góc) */}
+      {/* BANNER */}
       <div
-        className="relative w-11/12 mx-auto mt-8 h-[50vh] bg-cover bg-center rounded-xl shadow-lg overflow-hidden"
+        className="relative w-11/12 mx-auto mt-8 h-[50vh] bg-fixed bg-center bg-cover rounded-xl shadow-2xl overflow-hidden"
         style={{ backgroundImage: "url('/assets/pexels-steve-29599682.avif')" }}
       >
-        {/* Overlay tối nhẹ */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        {/* Nội dung banner */}
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Welcome Back!</h1>
-          <p className="text-sm md:text-base max-w-md">
+          <motion.h1
+            className="text-4xl md:text-5xl font-extrabold mb-3 drop-shadow-lg"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            Welcome Back!
+          </motion.h1>
+          <motion.p
+            className="text-sm md:text-lg max-w-md drop-shadow"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+          >
             Enter your email and password to login
-          </p>
+          </motion.p>
         </div>
       </div>
 
-      {/* FORM chồng lên banner (dùng margin-top âm) */}
-      <div className="container mx-auto px-4">
-        <div className="relative -mt-16 w-full max-w-md mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
-          {/* Tiêu đề form */}
-          <h2 className="text-center text-xl font-bold text-gray-700 mb-4">Login</h2>
-          {/* Form đăng nhập */}
+      {/* FORM */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.6 }}
+        className="container mx-auto px-4"
+      >
+        <div className="relative -mt-16 w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <h2 className="text-center text-2xl font-bold text-gray-700 mb-6">
+            Login
+          </h2>
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-              email
+                Email
               </label>
               <input
-                type="text"
-                placeholder="email"
+                type="email"
+                placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
-                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
                 Password
               </label>
               <input
                 type="password"
-                placeholder="Password"
+                placeholder="********"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
                 required
               />
             </div>
-            {/* Nút LOG IN */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-lg py-2.5 text-sm font-bold uppercase text-white shadow-md transition-all hover:opacity-90"
-              style={{
-                background: "linear-gradient(310deg, #2152ff 0%, #21d4fd 100%)",
-              }}
+              className={`w-full rounded-full py-3 text-sm font-bold uppercase text-white shadow-lg transition-transform transform hover:scale-105 ${
+                loading
+                  ? "bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-blue-600 to-purple-500"
+              }`}
             >
-              {loading ? "Logging in..." : "LOG IN"}
+              {loading ? (
+                <span className="flex items-center justify-center">
+                  <svg
+                    className="animate-spin h-5 w-5 mr-2 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8z"
+                    ></path>
+                  </svg>
+                  Logging in...
+                </span>
+              ) : (
+                "Log In"
+              )}
             </button>
           </form>
         </div>
-      </div>
+      </motion.div>
 
       {/* FOOTER */}
-      <footer className="mt-52 border-t border-gray-100 py-6">
+      <footer className="mt-32 border-t border-gray-100 py-6">
         <div className="container mx-auto flex flex-col items-center">
           <div className="text-sm text-gray-500">2025 © by Kang .</div>
         </div>
       </footer>
 
-      {/* Toaster for react-hot-toast */}    
       <Toaster />
-      </div>
-      
+    </div>
   );
 }
