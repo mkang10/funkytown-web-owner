@@ -98,20 +98,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col min-h-screen w-full bg-gradient-to-b from-white via-blue-50 to-white">
-      {/* NAVBAR */}
-      <nav className="w-full bg-white/70 shadow-sm backdrop-blur">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500"
-          >
-            Ftown Admin
-          </motion.div>
-        </div>
-      </nav>
-
+     
       {/* BANNER */}
       <div
         className="relative w-11/12 mx-auto mt-8 h-[50vh] bg-fixed bg-center bg-cover rounded-xl shadow-2xl overflow-hidden"
@@ -182,7 +169,7 @@ export default function LoginPage() {
               className={`w-full rounded-full py-3 text-sm font-bold uppercase text-white shadow-lg transition-transform transform hover:scale-105 ${
                 loading
                   ? "bg-gradient-to-r from-gray-400 to-gray-500 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-500"
+                  : "bg-gradient-to-r from-black to-black"
               }`}
             >
               {loading ? (
@@ -217,12 +204,7 @@ export default function LoginPage() {
         </div>
       </motion.div>
 
-      {/* FOOTER */}
-      <footer className="mt-32 border-t border-gray-100 py-6">
-        <div className="container mx-auto flex flex-col items-center">
-          <div className="text-sm text-gray-500">2025 © by Kang .</div>
-        </div>
-      </footer>
+
 
       <Toaster />
     </div>

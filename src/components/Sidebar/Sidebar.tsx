@@ -115,7 +115,7 @@ const Sidebar: React.FC = () => {
           
         />
 
-        <SidebarDropdown
+        {/* <SidebarDropdown
           id="orders"
           icon={<FiShoppingCart />}
           label="Đơn hàng"
@@ -128,7 +128,7 @@ const Sidebar: React.FC = () => {
           activeDropdown={activeDropdown}
           setActiveDropdown={setActiveDropdown}
           openSidebar={openSidebar}
-        />
+        /> */}
 
         <SidebarDropdown
           id="inventory"
@@ -157,7 +157,7 @@ const Sidebar: React.FC = () => {
           isOpen={isOpen}
         />
 
-        <SidebarDropdown
+        {/* <SidebarDropdown
           id="reports"
           icon={<FiSettings />}
           label="Báo cáo"
@@ -169,7 +169,7 @@ const Sidebar: React.FC = () => {
           activeDropdown={activeDropdown}
           setActiveDropdown={setActiveDropdown}
           openSidebar={openSidebar}
-        />
+        /> */}
       </List>
 
 
